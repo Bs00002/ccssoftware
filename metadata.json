@@ -1,0 +1,6 @@
+{
+  "name": "CCS Partners ERP",
+  "description": "CCS Partners Agricultural B2B Enterprise ERP with Admin, Distributor/Employee, and Dealer Portals",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
