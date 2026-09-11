@@ -33,6 +33,7 @@ export const getHeaders = (tokenOverride?: string): HeadersInit => {
   const token = tokenOverride || getAuthToken();
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
+    'Bypass-Tunnel-Reminder': 'true',
   };
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
@@ -44,6 +45,7 @@ export async function apiFetch(url: string, options: RequestInit = {}): Promise<
   const token = getAuthToken();
   const headers = {
     'Content-Type': 'application/json',
+    'Bypass-Tunnel-Reminder': 'true',
     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
     ...(options.headers as any),
   };
@@ -66,7 +68,7 @@ export async function apiFetch(url: string, options: RequestInit = {}): Promise<
     try {
       const refreshRes = await fetch(`${BASE_URL}/auth/token/refresh/`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Bypass-Tunnel-Reminder': 'true' },
         credentials: 'include',
         body: JSON.stringify(refreshToken ? { refresh: refreshToken } : {}),
       });
@@ -130,7 +132,7 @@ export const authApi = {
   login: async (username: string, password: string): Promise<{ access_token: string; user: User }> => {
     const res = await fetch(`${BASE_URL}/auth/login/`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Bypass-Tunnel-Reminder': 'true' },
       credentials: 'include',
       body: JSON.stringify({ email_or_username: username, password }),
     });
