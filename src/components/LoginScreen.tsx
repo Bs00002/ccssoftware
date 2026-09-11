@@ -27,18 +27,21 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
     }
   };
 
-  const handleQuickLogin = async (role: 'ADMIN' | 'DISTRIBUTOR' | 'DEALER') => {
+  const handleQuickLogin = async (role: 'ADMIN' | 'DISTRIBUTOR' | 'DEALER' | 'WAREHOUSE') => {
     setError('');
     setLoading(true);
     try {
       let u = 'admin';
       let p = 'adminpass';
       if (role === 'DISTRIBUTOR') {
-        u = 'testdistributor@example.com';
-        p = 'Testing@123';
+        u = 'employee1@ccs.com';
+        p = 'Ccs@12345';
       } else if (role === 'DEALER') {
-        u = 'testdealer@example.com';
-        p = 'Testing@123';
+        u = 'dealer1@ccs.com';
+        p = 'Ccs@12345';
+      } else if (role === 'WAREHOUSE') {
+        u = 'warehouse@ccs.com';
+        p = 'Ccs@12345';
       }
       const res = await authApi.login(u, p);
       onLoginSuccess(res.user);
