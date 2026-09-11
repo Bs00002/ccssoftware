@@ -1,7 +1,18 @@
 import { User, Order, Dealer, Distributor, Product, AttendanceRecord, Expense } from '../types';
 import { INITIAL_DEALERS, INITIAL_PRODUCTS } from '../data/mockData';
 
-const BASE_URL = (import.meta as any).env?.VITE_API_URL || (import.meta as any).env?.VITE_APP_API_URL || '/api';
+const getBaseUrl = (): string => {
+  const envUrl =
+    (import.meta as any).env?.VITE_API_BASE_URL ||
+    (import.meta as any).env?.VITE_API_URL ||
+    (import.meta as any).env?.VITE_APP_API_URL;
+  if (envUrl) {
+    return envUrl.replace(/\/+$/, '');
+  }
+  return '/api';
+};
+
+const BASE_URL = getBaseUrl();
 
 export const getAuthToken = (): string | null => {
   const token =
